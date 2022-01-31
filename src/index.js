@@ -1,15 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
-import 'tachyons';
-import App from './Containers/App';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import "tachyons";
+import App from "./Containers/App";
+import { searchRobots, requestRobots } from "./Containers/reducers";
+import { applyMiddleware, createStore, combineReducers } from "redux";
+import { Provider } from "react-redux";
+import { createLogger } from "redux-logger";
+import thunk from "redux-thunk";
+
+const rootReducer = combineReducers({ searchRobots, requestRobots });
+const logger = createLogger();
+const store = createStore(rootReducer, applyMiddleware(logger, thunk));
 
 ReactDOM.render(
   <React.StrictMode>
-    <App/>
-  ,</React.StrictMode>,
-  document.getElementById('root')
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
