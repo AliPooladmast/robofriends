@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { setSearchfield, requestRobots } from "./actions";
 import Cardlist from "../Components/Cardlist";
@@ -21,30 +21,28 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-class App extends Component {
-  componentDidMount() {
-    this.props.onRequestRobots();
-  }
+function App(props) {
+  useEffect(() => {
+    props.onRequestRobots();
+  }, []);
 
-  render() {
-    const { searchField, onSearchChange, robots, isPending } = this.props;
-    const filteredRobots = robots.filter((robot) =>
-      robot.name.toLowerCase().includes(searchField.toLowerCase())
-    );
-    return isPending ? (
-      <h1 className="tc f1">Loading</h1>
-    ) : (
-      <div className="tc">
-        <h1 className="f1">Robofriends</h1>
-        <SearchBox searchChange={onSearchChange} />
-        <Scroll>
-          <ErrorBoundry>
-            <Cardlist robots={filteredRobots} />
-          </ErrorBoundry>
-        </Scroll>
-      </div>
-    );
-  }
+  const { searchField, onSearchChange, robots, isPending } = props;
+  const filteredRobots = robots.filter((robot) =>
+    robot.name.toLowerCase().includes(searchField.toLowerCase())
+  );
+  return isPending ? (
+    <h1 className="tc f1">Loading</h1>
+  ) : (
+    <div className="tc">
+      <h1 className="f1">Robofriends</h1>
+      <SearchBox searchChange={onSearchChange} />
+      <Scroll>
+        <ErrorBoundry>
+          <Cardlist robots={filteredRobots} />
+        </ErrorBoundry>
+      </Scroll>
+    </div>
+  );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
