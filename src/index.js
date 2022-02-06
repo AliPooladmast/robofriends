@@ -4,14 +4,14 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import "tachyons";
 import App from "./Containers/App";
-import { searchRobots, requestRobots } from "./Containers/reducers";
-import { applyMiddleware, createStore, combineReducers } from "redux";
+import { combineReducers, applyMiddleware, createStore } from "redux";
 import { Provider } from "react-redux";
 import { createLogger } from "redux-logger";
 import thunk from "redux-thunk";
+import { searchRobots, requestRobots } from "./Containers/reducers";
 
-const rootReducer = combineReducers({ searchRobots, requestRobots });
 const logger = createLogger();
+const rootReducer = combineReducers({ searchRobots, requestRobots });
 const store = createStore(rootReducer, applyMiddleware(logger, thunk));
 
 ReactDOM.render(

@@ -14,12 +14,10 @@ const mapStateToProps = (state) => ({
   error: state.requestRobots.error,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onSearchChange: (event) => dispatch(setSearchfield(event.target.value)),
-    onRequestRobots: () => dispatch(requestRobots()),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  onSearchChange: (event) => dispatch(setSearchfield(event.target.value)),
+  onRequestRobots: () => dispatch(requestRobots()),
+});
 
 function App(props) {
   useEffect(() => {
