@@ -29,10 +29,10 @@ function App(props) {
     robot.name.toLowerCase().includes(searchField.toLowerCase())
   );
   return isPending ? (
-    <h1 className="tc f1">Loading</h1>
+    <h1 className="tc title">Loading</h1>
   ) : (
     <div className="tc">
-      <h1 className="f1">Robofriends</h1>
+      <h1 className="title">User Profile Search</h1>
       <SearchBox searchChange={onSearchChange} />
       <Scroll>
         <ErrorBoundry>
